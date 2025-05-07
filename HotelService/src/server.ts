@@ -8,6 +8,8 @@ import v2Router from "./router/v2/index.router";
 import { genericErrorHandler } from "./middlewares/error.middleware";
 import logger from "./config/logger.config";
 import { attachCorrelationIdMiddleware } from "./middlewares/correlation.middleware";
+import sequelize from "./db/models/sequelize";
+import Hotel from "./db/models/hotel";
 
 const app: Express = express();
 
@@ -21,8 +23,9 @@ app.use("/api/v2", v2Router);
 
 app.use(genericErrorHandler);
 
-app.listen(serverConfig.PORT, () => {
-  console.log(`Server is running on http://localhost:${serverConfig.PORT}`);
-  // console.log(`Press Ctrl+C to stop the server.`);
-  logger.info(`Server is running on http://localhost:${serverConfig.PORT}`);
+app.listen(serverConfig.PORT, async () => {
+  logger.info(`Server is running on port ${serverConfig.PORT}`);
+  logger.info(`Press CTRL-C to stop the server`);
+  await sequelize.authenticate(); // Test the database connection
+  logger.info("Database connection has been established successfully.");
 });
