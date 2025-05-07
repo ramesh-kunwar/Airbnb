@@ -36,3 +36,47 @@ export async function getHotelByIdHandler(
     success: true,
   });
 }
+
+export async function getAllHotelhandler(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  // 1. call the service layer
+
+  // 2. send the response
+  res.status(501).json({
+    message: "Not implemented",
+    data: null,
+    success: false,
+  });
+}
+
+export async function updateHotelHandler(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  // 1. call the service layer
+
+  // 2. send the response
+  res.status(501).json({
+    message: "Not implemented",
+    data: null,
+    success: false,
+  });
+}
+export async function deleteHotelHandler(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  // 1. call the service layer
+
+  // 2. send the response
+  res.status(501).json({
+    message: "Not implemented",
+    data: null,
+    success: false,
+  });
+}
