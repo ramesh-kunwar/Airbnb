@@ -1,7 +1,10 @@
 import { Request, Response, NextFunction } from "express";
 import {
   createHotelService,
+  deleteHotelService,
+  getAllHotelsService,
   getHotelByIdService,
+  updateHotelService,
 } from "../services/hotel.service";
 
 export async function createHotelHandler(
@@ -44,11 +47,13 @@ export async function getAllHotelhandler(
 ) {
   // 1. call the service layer
 
+  const hotelResponse = await getAllHotelsService();
+
   // 2. send the response
-  res.status(501).json({
-    message: "Not implemented",
-    data: null,
-    success: false,
+  res.status(200).json({
+    message: "Hotels found successfully",
+    data: hotelResponse,
+    success: true,
   });
 }
 
@@ -59,11 +64,16 @@ export async function updateHotelHandler(
 ) {
   // 1. call the service layer
 
+  const hotelResponse = await updateHotelService(
+    Number(req.params.id),
+    req.body
+  );
+
   // 2. send the response
-  res.status(501).json({
-    message: "Not implemented",
-    data: null,
-    success: false,
+  res.status(201).json({
+    message: "hotel Updated successfully",
+    data: hotelResponse,
+    success: true,
   });
 }
 export async function deleteHotelHandler(
@@ -72,11 +82,12 @@ export async function deleteHotelHandler(
   next: NextFunction
 ) {
   // 1. call the service layer
+  await deleteHotelService(Number(req.params.id));
 
   // 2. send the response
-  res.status(501).json({
-    message: "Not implemented",
+  res.status(202).json({
+    message: "Hotel deleted successfully",
     data: null,
-    success: false,
+    success: true,
   });
 }
