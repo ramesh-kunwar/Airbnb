@@ -6,6 +6,7 @@ import {
   getHotelByIdService,
   updateHotelService,
 } from "../services/hotel.service";
+import { StatusCodes } from "http-status-codes";
 
 export async function createHotelHandler(
   req: Request,
@@ -18,7 +19,7 @@ export async function createHotelHandler(
 
   // 2. Send the response
 
-  res.status(201).json({
+  res.status(StatusCodes.CREATED).json({
     message: "Hotel created successfully",
     data: hotelResponse,
     success: true,
@@ -33,7 +34,7 @@ export async function getHotelByIdHandler(
   // 1. call the service layer
   const hotelResponse = await getHotelByIdService(Number(req.params.id));
   // 2. send the response
-  res.status(200).json({
+  res.status(StatusCodes.OK).json({
     message: "Hotel found successfully",
     data: hotelResponse,
     success: true,
@@ -50,7 +51,7 @@ export async function getAllHotelhandler(
   const hotelResponse = await getAllHotelsService();
 
   // 2. send the response
-  res.status(200).json({
+  res.status(StatusCodes.OK).json({
     message: "Hotels found successfully",
     data: hotelResponse,
     success: true,
@@ -70,7 +71,7 @@ export async function updateHotelHandler(
   );
 
   // 2. send the response
-  res.status(201).json({
+  res.status(StatusCodes.OK).json({
     message: "hotel Updated successfully",
     data: hotelResponse,
     success: true,
@@ -85,7 +86,7 @@ export async function deleteHotelHandler(
   await deleteHotelService(Number(req.params.id));
 
   // 2. send the response
-  res.status(202).json({
+  res.status(StatusCodes.OK).json({
     message: "Hotel deleted successfully",
     data: null,
     success: true,
