@@ -1,9 +1,9 @@
 import { createHotelDTO } from "../dto/hotel.dto";
 import {
   createHotel,
-  deleteHotelById,
   getAllHotels,
   getHotelById,
+  softDeleteHotel,
   updateHotel,
 } from "../repositories/hotel.repository";
 
@@ -40,6 +40,6 @@ export async function updateHotelService(
 }
 
 export async function deleteHotelService(id: number) {
-  const hotel = await deleteHotelById(id);
+  const hotel = await softDeleteHotel(id);
   return hotel;
 }
